@@ -1,5 +1,5 @@
 <?php
- /* nsa_search.php
+ /* nsa_detail.php
   * 2017 Creative Feed / Damian West
   * -
   * developed for NetworkSA as a public search function for the bookmark.central.sa.edu.au library system
@@ -13,11 +13,11 @@
 require('nsa_bookmark.php');
 
 // check to ensure the form has been submitted
-if (!isset($_REQUEST['searchfor'])) {
+if (!isset($_REQUEST['record'])) {
   die('ERROR You have not entered the required detail.');
 }
 
 $NSA = new nsa_bookmark();
 
-echo json_encode($NSA->search($_REQUEST['field'], $_REQUEST['searchfor']), JSON_UNESCAPED_UNICODE);
+echo json_encode($NSA->detail($_REQUEST['record']), JSON_UNESCAPED_UNICODE);
 ?>
