@@ -145,7 +145,12 @@ class nsa_bookmark {
       } elseif (substr($TEXT, 0, 7) == 'Author:') {
         $ITEM['author'] = substr($TEXT, 7);
       } elseif (substr($TEXT, 0, 9) == 'Subjects:') {
-        $ITEM['subjects'] = substr($TEXT, 9);
+        // create another array out of the list of subjects
+        $LINKS = $ROWS->item($cr)->getElementsByTagName('a');
+        
+        for ($ca = 0; $ca < $LINKS->length; $ca++) {
+          $ITEM['subjects'][$ca] = $LINKS->item($ca)->nodeValue;
+        }
       } elseif (substr($TEXT, 0, 12) == 'Call number:') {
         $ITEM['call_number'] = substr($TEXT, 12);
       } elseif (substr($TEXT, 0, 11) == 'Publishing:') {
