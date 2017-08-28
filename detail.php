@@ -1,16 +1,17 @@
 <?php
- /* nsa_detail.php
+ /* detail.php
   * 2017 Creative Feed / Damian West
   * -
   * developed for NetworkSA as a public search function for the bookmark.central.sa.edu.au library system
-  * -
-  * Usage:
-  * nsa_search.php?keyword=<chk_keyword>&title=<chk_title>&author=<chk_author>&subject=<chk_subject>&series=<chk_series>&searchfor=<search_parameters>
-  * ^^ Queries the database and outputs a JSON return file
+  * to convert their system into a usable, searchable JSON API style function
+  *
+  * Usage: detail.php?record=<record_id>
+  * Returns the following fields in JSON, some may not exist (depending on type):
+  * 
   */
 
 // include the required files
-require('nsa_bookmark.php');
+require('bookmark.php');
 
 // check to ensure the form has been submitted
 if (!isset($_REQUEST['record'])) {
@@ -20,4 +21,5 @@ if (!isset($_REQUEST['record'])) {
 $NSA = new nsa_bookmark();
 
 echo json_encode($NSA->detail($_REQUEST['record']), JSON_UNESCAPED_UNICODE);
+
 ?>

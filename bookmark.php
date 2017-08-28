@@ -1,12 +1,13 @@
 <?php
- /* nsa_bookmark.php
+ /* bookmark.php
   * 2017 Creative Feed / Damian West
   * -
   * developed for NetworkSA as a public search function for the bookmark.central.sa.edu.au library system
+  * to convert their system into a usable, searchable JSON API style function
   */
 
 class nsa_bookmark {
-  // URL that bookmark lives
+  // URL that bookmark lives, as well as databage/page detail
   private $URL = 'http://bookmark.central.sa.edu.au/bmcpac.exe';
   private $DB = 'networksa';
   private $PAGE = 'networksa';
@@ -151,9 +152,10 @@ class nsa_bookmark {
         $ITEM['publishing'] = substr($TEXT, 11);
       } elseif (substr($TEXT, 0, 10) == 'Item type:') {
         $ITEM['item_type'] = substr($TEXT, 10);
+      } elseif (substr($TEXT, 0, 6) == 'Notes:') {
+        $ITEM['notes'] = substr($TEXT, 6);
       } elseif (substr($TEXT, 0, 10) == 'Copy info:') {
         $COLS = $ROWS->item($cr)->getElementsByTagName('tr')->item(1)->getElementsByTagName('td');
-        
         for ($cc = 0; $cc < $COLS->length; $cc++) {
           if ($cc == 0) {
             $ITEM['barcode'] = trim($COLS->item($cc)->nodeValue);
@@ -167,7 +169,7 @@ class nsa_bookmark {
         }
       }
     }
-    
+
     return $ITEM;
     
   }
