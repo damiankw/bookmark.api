@@ -6,8 +6,17 @@
   * to convert their system into a usable, searchable JSON API style function
   *
   * Usage: detail.php?record=<record_id>
-  * Returns the following fields in JSON, some may not exist (depending on type):
-  * 
+  * Returns: 
+  * - title: Item title
+  * - author: Item author
+  * - subjects: Item subjects (animals, foods, etc) [not working yet]
+  * - call_number: Item call number
+  * - publishing: Item publishing company
+  * - item_type: Item type (book, puzzle, etc)
+  * - notes: Any additional notes
+  * - barcode: Record ID
+  * - location: Physical location
+  * - status: Availability status
   */
 
 // include the required files
