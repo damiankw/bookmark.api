@@ -88,7 +88,7 @@ class nsa_bookmark {
         }
 
         if ($ITEM['barcode'] != 'BARCODE') {
-          $ITEMS[$ITEM['barcode']] = $ITEM;
+          $ITEMS[] = $ITEM;
         }
       }
     }

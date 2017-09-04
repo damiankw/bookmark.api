@@ -1,0 +1,68 @@
+
+                <form>
+                    <p><span class="searchby">Search by  </span>
+                        <input value="keyword" name="field" id="keyword" type="radio" checked>
+                        <label for="keyword"><span>&nbsp;</span> Keyword</label>
+                        <input value="title" name="field" id="title" type="radio">
+                       <label for="title"><span>&nbsp;</span>  Title</label>
+                        <input value="author" name="field" id="author" type="radio">
+                        <label for="author"><span>&nbsp;</span>  Author</label>
+                        <input value="subject" name="field" id="subject" type="radio">
+                        <label for="subject"><span>&nbsp;</span>  Subject</label>
+                        <input value="series" name="field" id="series" type="radio">
+                        <label for="series"><span>&nbsp;</span>  Series</label>
+                    </p>
+                    <input placeholder="search for" id="searchfor" name="searchfor" class="txt-browse" type="text">
+                  <button name="send" class="btn-browse" type="button" onclick="javascript:get_items();">Search</button>
+                    <div class="clearfix">&nbsp;</div>
+                </form>
+
+<div style="border: 1px solid black; height: 200px;" id="form"></div>
+<div style="border: 1px solid black; height: 200px;" id="json"></div>
+<div style="background-color:aquamarine;" id="status"></div>
+
+
+
+
+
+
+
+
+<script language="javascript">
+  function get_items() {
+    // get the json from the server
+    document.getElementById('json').innerHTML = '';
+    var html = new XMLHttpRequest();
+    html.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var json = JSON.parse(this.responseText);
+        for (var i = 0; i < json.length; i++) {
+          document.getElementById('json').innerHTML += json[i].title + '<br />';
+        }
+      }
+    }
+
+    html.open("GET", 'search.php?field=keyword&searchfor=' + document.getElementById('searchfor').value, true);
+
+    html.send();
+  }
+  
+  function submitit() {
+    // get the json from the server
+    var html = new XMLHttpRequest();
+    html.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var json = JSON.parse(this.responseText);
+        document.getElementById('json').innerHTML = json.title;
+      }
+    }
+
+    html.open("GET", 'detail.php?record=3458', true);
+
+    html.send();
+  }
+  // get the detail from the form
+  //document.getElementById('form').innerHTML = document.getElementById('searchfor').value;
+  
+  document.getElementById('status').innerHTML = 'Loaded.';
+</script>
